@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
     private Contact contato(){
         return new Contact(
-                "(Nome Exemplo)",
+                "Felipe Gonçalves Meireles",
                 "http://www.seusite.com.br",
                 "voce@seusite.com.br");
     }
