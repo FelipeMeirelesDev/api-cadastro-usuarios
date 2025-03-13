@@ -1,7 +1,7 @@
 package apicadastrousuarios.controller;
 
 import apicadastrousuarios.model.Usuario;
-import apicadastrousuarios.repository.UsuarioRepository;
+import apicadastrousuarios.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,31 +11,31 @@ import java.util.List;
 @RequestMapping("/usuarios")
 public class UsuarioController {
     @Autowired
-    private UsuarioRepository repository;
+    private UsuarioService service;
 
     @PostMapping
-    public Usuario post(@RequestBody Usuario usuario) {
-        return repository.save(usuario);
+    public Usuario criarUsuarios(@RequestBody Usuario usuario) {
+        return service.criarUsuario(usuario);
     }
 
     @PutMapping("/{id}")
-    public Usuario put(@PathVariable Integer id, @RequestBody Usuario usuario) {
+    public Usuario atualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
         usuario.setId(id); // Garante que o ID será atualizado corretamente
-        return repository.save(usuario);
+        return service.atualizarUsuario(usuario);
     }
 
     @GetMapping
-    public List<Usuario> getUsuarios() {
-        return repository.findAll();
+    public List<Usuario> listarUsuarios() {
+        return service.listarUsuarios();
     }
 
     @GetMapping("/{id}")
-    public Usuario getOne(@PathVariable Integer id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    public Usuario buscarUsuario(@PathVariable Integer id) {
+        return service.buscarUsuario(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuario(@PathVariable Integer id) {
-        repository.deleteById(id);
+    public void deletarUsuario(@PathVariable Integer id) {
+        service.deletarUsuario(id);
     }
 }
